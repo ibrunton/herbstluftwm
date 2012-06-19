@@ -98,7 +98,8 @@ hc set window_gap 5
 hc set snap_distance 15
 
 # tiled tag layouts
-hc load 1 "(split horizontal:0.500000:1 (split vertical:0.500000:0 (clients vertical:0) (clients horizontal:0)) (clients horizontal:0))"
+#hc load 1 "(split horizontal:0.500000:1 (split vertical:0.500000:0 (clients vertical:0) (clients horizontal:0)) (clients horizontal:0))"
+hc load 1 "(split vertical:0.700000:0 (split horizontal:0.400000:1 (clients horizontal:0) (clients horizontal:0)) (split horizontal:0.500000:0 (clients horizontal:0) (clients horizontal:0)))"
 hc load 2 "(split horizontal:0.750000:0 (clients horizontal:0) (clients horizontal:1))"
 hc load 4 "(split horizontal:0.550000:0 (clients vertical:0) (clients horizontal:0))"
 
