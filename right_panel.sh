@@ -7,6 +7,7 @@ cpuload=0
 memused=0
 memperc=0
 pacman_count=0
+aur_count=0
 mail_i_count=0
 mail_w_count=0
 
@@ -21,18 +22,15 @@ dbstatus="(dropbox)"
 datetime="(datetime)"
 visible=1
 
+# intervals
+MAIL_INTERVAL=300
+PACMAN_INTERVAL=600
+
+# counters
+mail_counter=$MAIL_INTERVAL
+pacman_counter=$PACMAN_INTERVAL
+
 # functions ------------------------------------------------------------------- 
-
-# Try to find textwidth binary.
-if [ -e "$(which textwidth 2> /dev/null)" ] ; then
-    textwidth="textwidth";
-elif [ -e "$(which dzen2-textwidth 2> /dev/null)" ] ; then
-    textwidth="dzen2-textwidth";
-else
-    echo "This script requires the textwidth tool of the dzen2 project."
-    exit 1
-fi
-
 
 function printMusic () {
 	echo -n $(nyxmms2 current | cut -d ':' -f 2)
@@ -43,6 +41,7 @@ function printUptime () {
 	# this version parses system command `uptime':
 	#raw_uptime=$(uptime | sed 's/.*up \(.*\),.*user.*/\1/' | sed 's/:/h /' | sed 's/ day.*, /d /' | \
 		#sed 's/\([0-9]\)$/\1m/' | sed 's/ \([0-9]\{1\}[hm]\)/ 0\1/g')
+
 	# this version parses info from conky:
 	uptime=$(echo $uptime | sed 's/ [0-9]\{1,2\}s//' | sed 's/ \([0-9]\)\([a-z]\)/ 0\1\2/g')
 	echo -n "^fg()Up: ^fg($DATA_FG)$uptime"
@@ -50,12 +49,14 @@ function printUptime () {
 }
 
 function printCPU () {
+	# cpuload comes from conky
 	[[ $cpuload -gt 70 ]] && cpuload="^fg($CRIT_FG)$cpuload^fg()"
 	echo -n "^fg()CPU ^fg($DATA_FG)${cpuload}%^fg()"
 	return
 }
 
 function printMem () {
+	# memperc and memused come from conky
 	[[ $memperc -gt 70 ]] && memperc="^fg($CRIT_FG)$memperc^fg()"
 	echo -n "^fg()MEM ^fg($DATA_FG)${memused} (${memperc}%)"
 	return
@@ -69,21 +70,33 @@ function printHDD () {
 }
 
 function printVolume () {
-	#vol_perc=$(amixer sget Master | sed -ne 's/^.*Mono: .*\[\([0-9]*\)%\].*$/\1/p')
+	vol_perc=$(amixer sget Master | sed -ne 's/^.*Mono: .*\[\([0-9]*\)%\].*$/\1/p')
 	echo -n "^fg()Vol ^fg($DATA_FG)${vol_perc}%^fg()"
 	return
 }
 
 function printPacman () {
-	#pacman_count=$(pacman -Qu | wc -l)
+	if [ $pacman_counter -ge $PACMAN_INTERVAL ]
+	then
+		pacman_count=$(pacman -Qu | wc -l)
+		aur_count=$(($(yaourt -Qua | wc -l) - $pacman_count))
+		pacman_counter=0
+	fi
+
 	[[ $pacman_count -gt 0 ]] && pacman_count="^fg($HI_FG)$pacman_count^fg()"
-	echo -n "^fg()Pac $pacman_count"
+	[[ $aur_count -gt 0 ]] && aur_count="^fg($HI_FG)$aur_count^fg()"
+
+	echo -n "^fg()Pac $pacman_count / AUR $aur_count"
 	return
 }
 
 function printMail () {
-	#mail_w_count=$(python $HOME/bin/gmail.py wolfshift)
-	#mail_i_count=$(python $HOME/bin/gmail.py iandbrunton)
+	if [ $mail_counter -ge $MAIL_INTERVAL ]
+	then
+		mail_w_count=$(python $HOME/bin/gmail.py wolfshift)
+		mail_i_count=$(python $HOME/bin/gmail.py iandbrunton)
+		mail_counter=0
+	fi
 
 	[[ $mail_w_count -lt 0 ]] && mail_w_count="^fg($CRIT_FG)$mail_w_count^fg()"
 	[[ $mail_i_count -lt 0 ]] && mail_i_count="^fg($CRIT_FG)$mail_i_count^fg()"
@@ -113,7 +126,7 @@ function printDropbox () {
 }
 
 function printDateTime () {
-	echo -n "^fg($DATA_FG)$(date '+%a %d %b^fg() / ^fg($DATA_FG)%H^fg():^fg($DATA_FG)%M')"
+	echo -n "^fg($DATA_FG)$(date '+%a %d %b^fg() * ^fg('$DATA_FG')%H^fg():^fg('$DATA_FG')%M')"
 	return
 }
 
@@ -160,6 +173,9 @@ function uniq_linebuffered() {
 
 		echo
 
+		mail_counter=$((mail_counter+1))
+		pacman_counter=$((pacman_counter+1))
+
 		read line || break
 		cmd=( $line )
 		case "${cmd[0]}" in
@@ -171,12 +187,12 @@ function uniq_linebuffered() {
 				cpuload=${cmd[@]:1:1}
 				memused=${cmd[@]:2:1}
 				memperc=${cmd[@]:3:1}
-				root_fs=${cmd[@]:4:1}
-				home_fs=${cmd[@]:5:1}
-				vol_perc=${cmd[@]:6:1}
-				pacman_count=${cmd[@]:7:1}
-				mail_w_count=${cmd[@]:8:1}
-				mail_i_count=${cmd[@]:9:1}
+				#root_fs=${cmd[@]:4:1}
+				#home_fs=${cmd[@]:5:1}
+				#vol_perc=${cmd[@]:6:1}
+				#pacman_count=${cmd[@]:7:1}
+				#mail_w_count=${cmd[@]:8:1}
+				#mail_i_count=${cmd[@]:9:1}
 				uptime=${cmd[@]:10}
 				#dbstatus=$(dropbox status)
 				;;

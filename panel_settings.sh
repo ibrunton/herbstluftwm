@@ -41,3 +41,14 @@ FONT="-*-ohsnap.icons-medium-r-normal-*-11-79-100-100-C-60-ISO8859-1"
 # conky config file
 CONKY_FILE=$HERBST_DIR/conkyrc2
 
+# Try to find textwidth binary.
+if [ -e "$(which textwidth 2> /dev/null)" ] ; then
+    textwidth="textwidth";
+elif [ -e "$(which dzen2-textwidth 2> /dev/null)" ] ; then
+    textwidth="dzen2-textwidth";
+else
+    echo "This script requires the textwidth tool of the dzen2 project."
+    exit 1
+fi
+
+
