@@ -45,7 +45,7 @@ herbstclient --idle | while true ; do
 	echo -n "^bg()^fg()"
 	echo -n "$spacer"
 	echo -n "$sep"
-	echo -n "$spacer"
+	echo -n " $spacer"
 
 	echo "${windowtitle//^/^^}"
 
