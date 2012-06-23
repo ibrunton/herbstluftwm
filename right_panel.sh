@@ -109,19 +109,19 @@ function printMail () {
 }
 
 function printDropbox () {
-	symbol="\\xb7"
+	dbstatus=$(dropbox status)
 	case $dbstatus in
 		Upload*)
-			symbol="[^fg($DATA_FG)\\xDB^fg()]"
+			echo -n "^fg($HI_FG)^i($ICONS/net_up_03.xbm)"
 			;;
 		Download*)
-			symbol="[^fg($DATA_FG)\\xDA^fg()]"
+			echo -n "^fg($HI_FG)^i($ICONS/net_down_03.xbm)"
 			;;
 		*)
-			symbol="\\xb7"
+			echo -n "^fg()^i($ICONS/cpu.xbm)"
 			;;
 	esac
-	echo -en $symbol
+	echo -n "^fg()"
 	return
 }
 
@@ -160,8 +160,8 @@ function uniq_linebuffered() {
 		printSpace
 		printVolume
 		printSpace
-		#printDropbox
-		#printSpace
+		printDropbox
+		printSpace
 		printPacman
 		printSpace
 		printMail

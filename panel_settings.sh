@@ -25,9 +25,11 @@ DATA_FG="#e0e0e0"
 HI_FG="#4abcd4"
 CRIT_FG="#cd5666"
 
-
 selbg="#426797" #selbg="#0abcd0"
 selfg=$HI_FG
+
+# XBM icons
+ICONS=$HOME/.config/icons/xbm8x8
 
 # menu icon
 ICON=" -A- "
