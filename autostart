@@ -42,6 +42,7 @@ hc keybind $mod-b emit_hook togglehidepanel
 
 # keybindings: tags
 TAG_NAMES=( {1..6} )
+#TAG_NAMES=( "term" "www" "xdr" "dev" "doc" "etc" )
 TAG_KEYS=( {1..6} 0 )
 
 hc rename default "${TAG_NAMES[0]}" || true
@@ -49,8 +50,8 @@ for i in ${!TAG_NAMES[@]} ; do
 	hc add "${TAG_NAMES[$i]}"
 	key="${TAG_KEYS[$i]}"
 	if ! [-z "$key" ] ; then
-		hc keybind "$mod-$key" use "${TAG_NAMES[$i]}"
-		hc keybind "$mod-Shift-$key" move "${TAG_NAMES[$i]}"
+		hc keybind "$mod-$key" use_index $((key - 1)) #use "${TAG_NAMES[$i]}"
+		hc keybind "$mod-Shift-$key" move_index $((key - 1)) #move "${TAG_NAMES[$i]}"
 	fi
 done
 
@@ -96,17 +97,18 @@ hc set window_border_normal_color $colour_normal
 hc set window_border_active_color $colour_active
 hc set window_gap 5
 hc set snap_distance 15
+hc set tree_style "╾│ ├└╼─┐"
 
 # tiled tag layouts
 #hc load 1 "(split horizontal:0.500000:1 (split vertical:0.500000:0 (clients vertical:0) (clients horizontal:0)) (clients horizontal:0))"
-hc load 1 "(split vertical:0.700000:0 (split horizontal:0.400000:1 (clients horizontal:0) (clients horizontal:0)) (split horizontal:0.500000:0 (clients horizontal:0) (clients horizontal:0)))"
-hc load 2 "(split horizontal:0.750000:0 (clients horizontal:0) (clients horizontal:1))"
-hc load 4 "(split horizontal:0.550000:0 (clients vertical:0) (clients horizontal:0))"
-hc load 5 "(split horizontal:0.650000:0 (clients vertical:0) (clients horizontal:0))"
+hc load ${TAG_NAMES[0]} "(split vertical:0.700000:0 (split horizontal:0.400000:1 (clients horizontal:0) (clients horizontal:0)) (split horizontal:0.500000:0 (clients horizontal:0) (clients horizontal:0)))"
+hc load ${TAG_NAMES[1]} "(split horizontal:0.750000:0 (clients horizontal:0) (clients horizontal:1))"
+hc load ${TAG_NAMES[3]} "(split horizontal:0.550000:0 (clients vertical:0) (clients horizontal:0))"
+hc load ${TAG_NAMES[4]} "(split horizontal:0.650000:0 (clients vertical:0) (clients horizontal:0))"
 
 # floating tags
-hc floating 3 on
-hc floating 6 on
+hc floating ${TAG_NAMES[2]} on
+hc floating ${TAG_NAMES[5]} on
 hc set raise_on_click 1
 hc set raise_on_focus 1
 
@@ -117,9 +119,9 @@ hc mousebind $mod+Button3 resize
 # rules
 hc unrule -F
 hc rule focus=on
-hc rule class=Firefox tag=2
-hc rule class=gimp tag=6 pseudotile=on
-hc rule class=Okular tag=5
+hc rule class=Firefox tag=${TAG_NAMES[1]}
+hc rule class=gimp tag=${TAG_NAMES[5]} pseudotile=on
+hc rule class=Okular tag=${TAG_NAMES[4]}
 hc rule class=URxvt instance=MAILTO pseudotile=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_DIALOG' pseudotile=on
 hc rule class=Kdialog pseudotile=on

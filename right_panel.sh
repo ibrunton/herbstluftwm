@@ -193,7 +193,7 @@ function uniq_linebuffered() {
 				#pacman_count=${cmd[@]:7:1}
 				#mail_w_count=${cmd[@]:8:1}
 				#mail_i_count=${cmd[@]:9:1}
-				uptime=${cmd[@]:10}
+				#uptime=${cmd[@]:10}
 				#dbstatus=$(dropbox status)
 				;;
 			quit_panel)

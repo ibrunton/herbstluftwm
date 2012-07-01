@@ -23,29 +23,26 @@ herbstclient --idle | while true ; do
 		case ${i:0:1} in
 			'#') # currently focused tag
 				#echo -n "^bg($selbg)^fg($selfg)"
-				echo -n "^fg($selbg)^ro(${box_width}x11)^ib(1)^p(-$box_width)^fg($selfg)"
+				echo -n "^bg($selbg)^fg($selborder)^ro(${box_width}x11)^ib(1)^p(-$box_width)^fg($selfg)"
 				;;
 			'+') # focused tag on unfocused monitor
 				echo -n "^bg()^fg()"
 				;;
 			':') # occupied, unfocused tag
-				echo -n "^bg()^fg($HI_FG)"
+				echo -n "^bg($occbg)^fg($occfg)"
 				;;
 			'!') # tag contains urgent window
-				echo -n "^bg()^fg()"
+				echo -n "^bg($urgbg)^fg($urgfg)"
 				;;
 			*) # unfocused, unoccupied tag
-				echo -n "^bg()^fg()"
+				echo -n "^bg($emptybg)^fg($emptyfg)"
 				;;
 		esac
 
-		echo -n "^ca(1,herbstclient focus_monitor $monitor && "'herbstclient use "'${i:1}'") '${i:1}" ^ca()"
+		echo -n "^ca(1,herbstclient focus_monitor $monitor && "'herbstclient use "'${i:1}'") '${i:1}" ^ca() "
 	done
 
-	echo -n "^bg()^fg()"
-	echo -n "$spacer"
-	echo -n "$sep"
-	echo -n " $spacer"
+	echo -n "^bg()^fg()  $sep $spacer"
 
 	echo "${windowtitle//^/^^}"
 
