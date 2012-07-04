@@ -58,7 +58,7 @@ function printCPU () {
 function printMem () {
 	# memperc and memused come from conky
 	[[ $memperc -gt 70 ]] && memperc="^fg($CRIT_FG)$memperc^fg()"
-	echo -n "^fg()MEM ^fg($DATA_FG)${memused} (${memperc}%)"
+	echo -n "^fg()Mem ^fg($DATA_FG)${memused} (${memperc}%)"
 	return
 }
 
@@ -70,18 +70,14 @@ function printHDD () {
 }
 
 function printVolume () {
-	vol_perc=$(cat $HOME/.local/share/volume)
+	vol_perc=$(cat $XDG_DATA_HOME/volume)
 	echo -n "^fg()Vol ^fg($DATA_FG)${vol_perc}%^fg()"
 	return
 }
 
 function printPacman () {
-	if [ $pacman_counter -ge $PACMAN_INTERVAL ]
-	then
-		pacman_count=$(pacman -Qu | wc -l)
-		aur_count=$(($(yaourt -Qua | wc -l) - $pacman_count))
-		pacman_counter=0
-	fi
+	pacman_count=$(cat $XDG_DATA_HOME/pacman_count)
+	aur_count=$(($(cat $XDG_DATA_HOME/aur_count) - $pacman_count))
 
 	[[ $pacman_count -gt 0 ]] && pacman_count="^fg($HI_FG)$pacman_count^fg()"
 	[[ $aur_count -gt 0 ]] && aur_count="^fg($HI_FG)$aur_count^fg()"
@@ -91,12 +87,8 @@ function printPacman () {
 }
 
 function printMail () {
-	if [ $mail_counter -ge $MAIL_INTERVAL ]
-	then
-		mail_w_count=$(python $HOME/bin/gmail.py wolfshift)
-		mail_i_count=$(python $HOME/bin/gmail.py iandbrunton)
-		mail_counter=0
-	fi
+	mail_w_count=$(cat $XDG_DATA_HOME/mailcount_wolfshift)
+	mail_i_count=$(cat $XDG_DATA_HOME/mailcount_iandbrunton)
 
 	[[ $mail_w_count -lt 0 ]] && mail_w_count="^fg($CRIT_FG)$mail_w_count^fg()"
 	[[ $mail_i_count -lt 0 ]] && mail_i_count="^fg($CRIT_FG)$mail_i_count^fg()"
@@ -172,9 +164,6 @@ function uniq_linebuffered() {
 		echo -n " "
 
 		echo
-
-		mail_counter=$((mail_counter+1))
-		pacman_counter=$((pacman_counter+1))
 
 		read line || break
 		cmd=( $line )
