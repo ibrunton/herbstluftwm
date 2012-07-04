@@ -70,7 +70,7 @@ function printHDD () {
 }
 
 function printVolume () {
-	vol_perc=$(amixer sget Master | sed -ne 's/^.*Mono: .*\[\([0-9]*\)%\].*$/\1/p')
+	vol_perc=$(cat $HOME/.local/share/volume)
 	echo -n "^fg()Vol ^fg($DATA_FG)${vol_perc}%^fg()"
 	return
 }

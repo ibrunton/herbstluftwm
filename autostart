@@ -84,9 +84,12 @@ hc keybind $mod-Shift-k shift up
 hc keybind $mod-Shift-l shift right
 
 # keybindings: volume
-hc keybind $mod-F10 spawn amixer -q sset Master 1- unmute
-hc keybind $mod-F11 spawn amixer -q sset Master toggle
-hc keybind $mod-F12 spawn amixer -q sset Master 1+ unmute
+#hc keybind $mod-F10 spawn amixer -q sset Master 1- unmute
+#hc keybind $mod-F11 spawn amixer -q sset Master toggle
+#hc keybind $mod-F12 spawn amixer -q sset Master 1+ unmute
+hc keybind $mod-F10 spawn volosd.sh down -i 1
+hc keybind $mod-F11 spawn volosd.sh mute
+hc keybind $mod-F12 spawn volosd.sh up -i 1
 
 # colours/appearance
 hc set default_frame_layout 1
