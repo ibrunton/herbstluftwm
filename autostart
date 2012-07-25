@@ -22,6 +22,7 @@ terminal=urxvt
 emacs=emet
 file_manager=dolphin
 browser=firefox
+alternate_browser=luakit
 
 # keybindings
 mod=Mod4
@@ -36,6 +37,7 @@ hc keybind $mod-Shift-Escape spawn $HOME/bin/slrh.sh
 hc keybind $mod-p spawn dmenu_run -fn "-misc-ohsnap-medium-r-normal--11-79-100-100-c-60-iso8859-1" -nb '#000000' -nf '#e0e0e0' -sb '#000000' -sf '#4abcd4'
 hc keybind $mod-Shift-p spawn $HOME/bin/dmenu_custom.bash
 hc keybind $mod-w spawn $browser
+hc keybind $mod-Shift-w spawn $alternate_browser
 hc keybind $mod-m spawn $HOME/bin/mygtkmenu.py
 hc keybind $mod-t spawn $file_manager
 hc keybind $mod-b emit_hook togglehidepanel
@@ -62,6 +64,8 @@ hc keybind $mod-a split horizontal 0.5
 hc keybind $mod-s split horizontal 0.33
 hc keybind $mod-z split vertical 0.5
 hc keybind $mod-x split vertical 0.33
+hc keybind $mod-space cycle_layout 1
+hc keybind $mod-Shift-space cycle_layout -1
 
 # keybindings: resizing
 RESIZESTEP=0.05
@@ -104,7 +108,8 @@ hc set tree_style "╾│ ├└╼─┐"
 
 # tiled tag layouts
 #hc load 1 "(split horizontal:0.500000:1 (split vertical:0.500000:0 (clients vertical:0) (clients horizontal:0)) (clients horizontal:0))"
-hc load ${TAG_NAMES[0]} "(split vertical:0.700000:0 (split horizontal:0.400000:1 (clients horizontal:0) (clients horizontal:0)) (split horizontal:0.500000:0 (clients horizontal:0) (clients horizontal:0)))"
+#hc load ${TAG_NAMES[0]} "(split vertical:0.700000:0 (split horizontal:0.400000:1 (clients horizontal:0) (clients horizontal:0)) (split horizontal:0.500000:0 (clients horizontal:0) (clients horizontal:0)))"
+hc load ${TAG_NAMES[0]} "(split horizontal:0.450000:1 (split vertical:0.500000:1 (clients horizontal:0) (clients horizontal:0 0x1a00007)) (split vertical:0.650000:0 (clients horizontal:0 0x1800007) (clients horizontal:0)))"
 hc load ${TAG_NAMES[1]} "(split horizontal:0.750000:0 (clients horizontal:0) (clients horizontal:1))"
 hc load ${TAG_NAMES[3]} "(split horizontal:0.550000:0 (clients vertical:0) (clients horizontal:0))"
 hc load ${TAG_NAMES[4]} "(split horizontal:0.650000:0 (clients vertical:0) (clients horizontal:0))"
@@ -129,6 +134,7 @@ hc rule class=URxvt instance=MAILTO pseudotile=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_DIALOG' pseudotile=on
 hc rule class=Kdialog pseudotile=on
 hc rule class=sxiv pseudotile=on
+#hc rule class=luakit
 
 # unlock
 hc unlock

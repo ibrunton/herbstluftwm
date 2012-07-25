@@ -8,6 +8,7 @@ space_width=$(textwidth "$FONT" " ")
 herbstclient pad $monitor $PANEL_PADDING
 
 TAGS=( $(herbstclient tag_status $monitor) )
+MODE=$($HOME/.config/herbstluftwm/tag_mode.sh)
 
 windowtitle=""
 
@@ -42,7 +43,8 @@ herbstclient --idle | while true ; do
 		echo -n "^ca(1,herbstclient focus_monitor $monitor && "'herbstclient use "'${i:1}'") '${i:1}" ^ca() "
 	done
 
-	echo -n "^bg()^fg()  $sep $spacer"
+	#echo -n "^bg()^fg()  $sep $spacer"
+	echo -n "^bg()^fg()   [${MODE:0:1}] $spacer"
 
 	echo "${windowtitle//^/^^}"
 
@@ -52,6 +54,7 @@ herbstclient --idle | while true ; do
 		tag*)
 			#echo "reseting tags" >&2
 			TAGS=( $(herbstclient tag_status $monitor) )
+			MODE=$($HOME/.config/herbstluftwm/tag_mode.sh)
 			;;
 		quit_panel)
 			exit
