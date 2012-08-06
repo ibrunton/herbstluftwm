@@ -56,6 +56,9 @@ herbstclient --idle | while true ; do
 			TAGS=( $(herbstclient tag_status $monitor) )
 			MODE=$($HOME/.config/herbstluftwm/tag_mode.sh)
 			;;
+		layoutchanged)
+			MODE=$($HOME/.config/herbstluftwm/tag_mode.sh)
+			;;
 		quit_panel)
 			exit
 			;;

@@ -44,7 +44,6 @@ hc keybind $mod-b emit_hook togglehidepanel
 
 # keybindings: tags
 TAG_NAMES=( {1..6} )
-#TAG_NAMES=( "term" "www" "xdr" "dev" "doc" "etc" )
 TAG_KEYS=( {1..6} 0 )
 
 hc rename default "${TAG_NAMES[0]}" || true
@@ -59,13 +58,17 @@ done
 
 # keybindings: layout
 hc keybind $mod-Control-d remove
-hc keybind $mod-Shift-f floating toggle
 hc keybind $mod-a split horizontal 0.5
 hc keybind $mod-s split horizontal 0.33
 hc keybind $mod-z split vertical 0.5
 hc keybind $mod-x split vertical 0.33
-hc keybind $mod-space cycle_layout 1
-hc keybind $mod-Shift-space cycle_layout -1
+hc keybind $mod-space cycle_layout 1 && hc emit_hook layoutchanged
+hc keybind $mod-Shift-space cycle_layout -1 && hc emit_hook layoutchanged
+hc keybind $mod-Shift-m set_layout max
+hc keybind $mod-Shift-t set_layout horizontal
+hc keybind $mod-Shift-v set_layout vertical
+hc keybind $mod-Shift-g set_layout grid
+hc keybind $mod-Shift-f floating toggle
 
 # keybindings: resizing
 RESIZESTEP=0.05
@@ -88,9 +91,6 @@ hc keybind $mod-Shift-k shift up
 hc keybind $mod-Shift-l shift right
 
 # keybindings: volume
-#hc keybind $mod-F10 spawn amixer -q sset Master 1- unmute
-#hc keybind $mod-F11 spawn amixer -q sset Master toggle
-#hc keybind $mod-F12 spawn amixer -q sset Master 1+ unmute
 hc keybind $mod-F10 spawn volosd.sh down -i 1
 hc keybind $mod-F11 spawn volosd.sh mute
 hc keybind $mod-F12 spawn volosd.sh up -i 1
@@ -107,12 +107,11 @@ hc set snap_distance 15
 hc set tree_style "╾│ ├└╼─┐"
 
 # tiled tag layouts
-#hc load 1 "(split horizontal:0.500000:1 (split vertical:0.500000:0 (clients vertical:0) (clients horizontal:0)) (clients horizontal:0))"
 #hc load ${TAG_NAMES[0]} "(split vertical:0.700000:0 (split horizontal:0.400000:1 (clients horizontal:0) (clients horizontal:0)) (split horizontal:0.500000:0 (clients horizontal:0) (clients horizontal:0)))"
 hc load ${TAG_NAMES[0]} "(split horizontal:0.450000:1 (split vertical:0.500000:1 (clients horizontal:0) (clients horizontal:0 0x1a00007)) (split vertical:0.650000:0 (clients horizontal:0 0x1800007) (clients horizontal:0)))"
 hc load ${TAG_NAMES[1]} "(split horizontal:0.750000:0 (clients horizontal:0) (clients horizontal:1))"
 hc load ${TAG_NAMES[3]} "(split horizontal:0.550000:0 (clients vertical:0) (clients horizontal:0))"
-hc load ${TAG_NAMES[4]} "(split horizontal:0.650000:0 (clients vertical:0) (clients horizontal:0))"
+hc load ${TAG_NAMES[4]} "(split horizontal:0.550000:0 (clients max:0) (clients horizontal:0))"
 
 # floating tags
 hc floating ${TAG_NAMES[2]} on
@@ -134,7 +133,6 @@ hc rule class=URxvt instance=MAILTO pseudotile=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_DIALOG' pseudotile=on
 hc rule class=Kdialog pseudotile=on
 hc rule class=sxiv pseudotile=on
-#hc rule class=luakit
 
 # unlock
 hc unlock
