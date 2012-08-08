@@ -40,7 +40,7 @@ hc keybind $mod-w spawn $browser
 hc keybind $mod-Shift-w spawn $alternate_browser
 hc keybind $mod-m spawn $HOME/bin/mygtkmenu.py
 hc keybind $mod-t spawn $file_manager
-hc keybind $mod-b emit_hook togglehidepanel
+hc keybind $mod-b spawn $HOME/bin/toggle_conky.sh
 
 # keybindings: tags
 TAG_NAMES=( {1..6} )
