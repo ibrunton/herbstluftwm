@@ -133,6 +133,7 @@ hc rule class=URxvt instance=MAILTO pseudotile=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_DIALOG' pseudotile=on
 hc rule class=Kdialog pseudotile=on
 hc rule class=sxiv pseudotile=on
+hc rule class=dolphin pseudotile=on
 
 # unlock
 hc unlock
