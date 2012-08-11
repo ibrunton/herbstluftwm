@@ -21,6 +21,7 @@ colour_active='#426797' #'#f6ff00'
 terminal=urxvt
 emacs=emet
 file_manager=dolphin
+alt_file_manager=$HOME/bin/ranger_spawn.sh
 browser=firefox
 alternate_browser=luakit
 
@@ -40,6 +41,7 @@ hc keybind $mod-w spawn $browser
 hc keybind $mod-Shift-w spawn $alternate_browser
 hc keybind $mod-m spawn $HOME/bin/mygtkmenu.py
 hc keybind $mod-t spawn $file_manager
+hc keybind $mod-Shift-t spawn $alt_file_manager
 hc keybind $mod-b spawn $HOME/bin/toggle_conky.sh
 
 # keybindings: tags
