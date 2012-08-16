@@ -40,7 +40,7 @@ hc keybind $mod-Shift-p spawn $HOME/bin/dmenu_custom.bash
 hc keybind $mod-w spawn $browser
 hc keybind $mod-Shift-w spawn $alternate_browser
 hc keybind $mod-m spawn $HOME/bin/mygtkmenu.py
-hc keybind $mod-t spawn $file_manager
+hc keybind $mod-t spawn $alt_file_manager
 hc keybind $mod-Shift-t spawn $alt_file_manager
 hc keybind $mod-b spawn $HOME/bin/toggle_conky.sh
 
@@ -109,9 +109,8 @@ hc set snap_distance 15
 hc set tree_style "╾│ ├└╼─┐"
 
 # tiled tag layouts
-#hc load ${TAG_NAMES[0]} "(split vertical:0.700000:0 (split horizontal:0.400000:1 (clients horizontal:0) (clients horizontal:0)) (split horizontal:0.500000:0 (clients horizontal:0) (clients horizontal:0)))"
 hc load ${TAG_NAMES[0]} "(split horizontal:0.450000:1 (split vertical:0.500000:1 (clients horizontal:0) (clients horizontal:0 0x1a00007)) (split vertical:0.650000:0 (clients horizontal:0 0x1800007) (clients horizontal:0)))"
-hc load ${TAG_NAMES[1]} "(split horizontal:0.750000:0 (clients horizontal:0) (clients horizontal:1))"
+hc load ${TAG_NAMES[1]} "(split horizontal:0.750000:0 (clients max:0) (clients horizontal:1))"
 hc load ${TAG_NAMES[3]} "(split horizontal:0.550000:0 (clients vertical:0) (clients horizontal:0))"
 hc load ${TAG_NAMES[4]} "(split horizontal:0.550000:0 (clients max:0) (clients horizontal:0))"
 
