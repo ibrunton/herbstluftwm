@@ -43,6 +43,7 @@ hc keybind $mod-m spawn $HOME/bin/mygtkmenu.py
 hc keybind $mod-t spawn $alt_file_manager
 hc keybind $mod-Shift-t spawn $alt_file_manager
 hc keybind $mod-b spawn $HOME/bin/toggle_conky.sh
+hc keybind Mod4-y spawn $HOME/bin/toggle_wintitle.sh
 
 # keybindings: tags
 TAG_NAMES=( {1..6} )
