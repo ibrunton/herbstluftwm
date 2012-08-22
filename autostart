@@ -47,8 +47,7 @@ hc keybind $mod-y spawn $HOME/bin/toggle_wintitle.sh
 
 # MPC controls
 hc keybind $mod-Shift-z spawn mpc prev
-hc keybind $mod-Shift-x spawn mpc play
-hc keybind $mod-Shift-c spawn mpc toggle
+hc keybind $mod-Shift-x spawn mpc toggle
 hc keybind $mod-Shift-v spawn mpc stop
 hc keybind $mod-Shift-b spawn mpc next
 
