@@ -20,8 +20,7 @@ colour_normal='#666666' #'#ae8451'
 colour_active='#426797' #'#f6ff00'
 terminal=urxvt
 emacs=emet
-file_manager=dolphin
-alt_file_manager=$HOME/bin/ranger_spawn.sh
+file_manager=$HOME/bin/ranger_spawn.sh
 browser=firefox
 alternate_browser=luakit
 
@@ -34,22 +33,15 @@ hc keybind $mod-Shift-q quit
 hc keybind $mod-Shift-c close
 hc keybind $mod-Return spawn $terminal
 hc keybind $mod-Shift-Return spawn $emacs
-hc keybind $mod-Shift-Escape spawn $HOME/bin/slrh.sh
+hc keybind $mod-Shift-Escape spawn sudo pm-suspend
 hc keybind $mod-p spawn dmenu_run -fn "-misc-ohsnap-medium-r-normal--11-79-100-100-c-60-iso8859-1" -nb '#000000' -nf '#e0e0e0' -sb '#000000' -sf '#4abcd4'
 hc keybind $mod-Shift-p spawn $HOME/bin/dmenu_custom.bash
 hc keybind $mod-w spawn $browser
 hc keybind $mod-Shift-w spawn $alternate_browser
 hc keybind $mod-m spawn $HOME/bin/mygtkmenu.py
-hc keybind $mod-t spawn $alt_file_manager
-hc keybind $mod-Shift-t spawn $alt_file_manager
+hc keybind $mod-t spawn $file_manager
 hc keybind $mod-b spawn $HOME/bin/toggle_conky.sh
 hc keybind $mod-y spawn $HOME/bin/toggle_wintitle.sh
-
-# MPC controls
-hc keybind $mod-Shift-z spawn mpc prev
-hc keybind $mod-Shift-x spawn mpc toggle
-hc keybind $mod-Shift-v spawn mpc stop
-hc keybind $mod-Shift-b spawn mpc next
 
 
 # keybindings: tags
@@ -99,6 +91,12 @@ hc keybind $mod-Shift-h shift left
 hc keybind $mod-Shift-j shift down
 hc keybind $mod-Shift-k shift up
 hc keybind $mod-Shift-l shift right
+
+# MPC controls
+hc keybind $mod-Shift-z spawn mpc prev
+hc keybind $mod-Shift-x spawn mpc toggle
+hc keybind $mod-Shift-v spawn mpc stop
+hc keybind $mod-Shift-b spawn mpc next
 
 # keybindings: volume
 hc keybind $mod-F10 spawn volosd.sh down -i 1
