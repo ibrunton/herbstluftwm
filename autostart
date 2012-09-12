@@ -33,7 +33,7 @@ hc keybind $mod-Shift-q quit
 hc keybind $mod-Shift-c close
 hc keybind $mod-Return spawn $terminal
 hc keybind $mod-Shift-Return spawn $emacs
-hc keybind $mod-Shift-Escape spawn sudo pm-suspend
+hc keybind $mod-Shift-Escape spawn sudo systemctl suspend
 hc keybind $mod-p spawn dmenu_run -fn "-misc-ohsnap-medium-r-normal--11-79-100-100-c-60-iso8859-1" -nb '#000000' -nf '#e0e0e0' -sb '#000000' -sf '#4abcd4'
 hc keybind $mod-Shift-p spawn $HOME/bin/dmenu_custom.bash
 hc keybind $mod-w spawn $browser
@@ -141,6 +141,7 @@ hc rule windowtype~'_NET_WM_WINDOW_TYPE_DIALOG' pseudotile=on
 hc rule class=Kdialog pseudotile=on
 hc rule class=sxiv pseudotile=on
 hc rule class=dolphin pseudotile=on
+hc rule class=vlc pseudotile=on
 
 # unlock
 hc unlock
