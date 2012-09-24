@@ -13,7 +13,7 @@ hc keyunbind --all
 hc mouseunbind
 
 # make room for dzen2 bar
-hc pad 0 10 0 0
+hc pad 0 12 0 0
 
 # variables
 colour_normal='#666666' #'#ae8451'
