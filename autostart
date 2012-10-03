@@ -117,7 +117,7 @@ hc set tree_style "╾│ ├└╼─┐"
 # tiled tag layouts
 hc load ${TAG_NAMES[0]} "(split horizontal:0.450000:1 (split vertical:0.500000:1 (clients horizontal:0) (clients horizontal:0 0x1a00007)) (split vertical:0.650000:0 (clients horizontal:0 0x1800007) (clients horizontal:0)))"
 hc load ${TAG_NAMES[1]} "(split horizontal:0.750000:0 (clients max:0) (clients horizontal:1))"
-hc load ${TAG_NAMES[3]} "(split horizontal:0.550000:0 (clients vertical:0) (clients horizontal:0))"
+hc load ${TAG_NAMES[3]} "(split horizontal:0.550000:0 (clients vertical:0) (clients max:0))"
 hc load ${TAG_NAMES[4]} "(split horizontal:0.550000:0 (clients max:0) (clients horizontal:0))"
 
 # floating tags
@@ -142,6 +142,7 @@ hc rule class=Kdialog pseudotile=on
 hc rule class=sxiv pseudotile=on
 hc rule class=dolphin pseudotile=on
 hc rule class=vlc pseudotile=on
+hc rule class=URxvt instance=RANGER pseudotile=on
 
 # unlock
 hc unlock
