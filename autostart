@@ -17,7 +17,9 @@ hc pad 0 12 0 0
 
 # variables
 colour_normal='#666666' #'#ae8451'
-colour_active='#426797' #'#f6ff00'
+#colour_normal='#ae8451'
+colour_active='#426797' 
+#colour_active='#f0ac00'
 terminal=urxvt
 emacs=emet
 file_manager=$HOME/bin/ranger_spawn.sh
@@ -30,7 +32,7 @@ mod=Mod4
 # programs & overall functions
 hc keybind $mod-Control-Shift-r reload
 hc keybind $mod-Shift-q quit
-hc keybind $mod-Shift-c close
+hc keybind $mod-Control-c close
 hc keybind $mod-Return spawn $terminal
 hc keybind $mod-Shift-Return spawn $emacs
 hc keybind $mod-Shift-Escape spawn sudo systemctl suspend
@@ -41,7 +43,7 @@ hc keybind $mod-Shift-w spawn $alternate_browser
 hc keybind $mod-m spawn $HOME/bin/mygtkmenu.py
 hc keybind $mod-t spawn $file_manager
 hc keybind $mod-b spawn $HOME/bin/toggle_conky.sh
-hc keybind $mod-y spawn $HOME/bin/toggle_wintitle.sh
+hc keybind $mod-y spawn $HOME/bin/toggle.sh conky-stats
 
 
 # keybindings: tags
@@ -58,19 +60,23 @@ for i in ${!TAG_NAMES[@]} ; do
 	fi
 done
 
+#for i in ( {7..9} ) ; do
+	#hc keybind "$mod-$i" chain . add $i . use $i
+#done
+
 # keybindings: layout
 hc keybind $mod-Control-d remove
 hc keybind $mod-a split horizontal 0.5
 hc keybind $mod-s split horizontal 0.33
 hc keybind $mod-z split vertical 0.5
 hc keybind $mod-x split vertical 0.33
-hc keybind $mod-space cycle_layout 1 && hc emit_hook layoutchanged
-hc keybind $mod-Shift-space cycle_layout -1 && hc emit_hook layoutchanged
-hc keybind $mod-Shift-m set_layout max
-hc keybind $mod-Shift-t set_layout horizontal
-hc keybind $mod-Shift-v set_layout vertical
-hc keybind $mod-Shift-g set_layout grid
-hc keybind $mod-Shift-f floating toggle
+hc keybind $mod-space cycle_layout
+hc keybind $mod-Shift-space cycle_layout -1
+hc keybind $mod-Control-m set_layout max
+hc keybind $mod-Control-t set_layout horizontal
+hc keybind $mod-Control-v set_layout vertical
+hc keybind $mod-Control-g set_layout grid
+hc keybind $mod-Control-f floating toggle
 
 # keybindings: resizing
 RESIZESTEP=0.05
@@ -82,7 +88,8 @@ hc keybind $mod-Control-l resize right +$RESIZESTEP
 # keybindings: focus
 hc keybind $mod-Tab cycle_all +1
 hc keybind $mod-Shift-Tab cycle_all -1
-hc keybind $mod-c cycle
+hc keybind $mod-c cycle 1
+hc keybind $mod-Shift-c -1
 hc keybind $mod-h focus left
 hc keybind $mod-j focus down
 hc keybind $mod-k focus up
@@ -99,9 +106,13 @@ hc keybind $mod-Shift-v spawn mpc stop
 hc keybind $mod-Shift-b spawn mpc next
 
 # keybindings: volume
+# Master:
 hc keybind $mod-F10 spawn volosd.sh down -i 1
 hc keybind $mod-F11 spawn volosd.sh mute
 hc keybind $mod-F12 spawn volosd.sh up -i 1
+# mpc:
+hc keybind $mod-Shift-F10 spawn mpc volume -1
+hc keymind $mod-Shift-F12 spawn mpc volume +1
 
 # colours/appearance
 hc set default_frame_layout 1
@@ -137,12 +148,14 @@ hc rule class=Firefox tag=${TAG_NAMES[1]}
 hc rule class=gimp tag=${TAG_NAMES[5]} pseudotile=on
 hc rule class=Okular tag=${TAG_NAMES[4]}
 hc rule class=URxvt instance=MAILTO pseudotile=on
+hc rule class=URxvt instance=RANGER pseudotile=on
+hc rule class=URxvt instance=CENTRED pseudotile=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_DIALOG' pseudotile=on
 hc rule class=Kdialog pseudotile=on
 hc rule class=sxiv pseudotile=on
 hc rule class=dolphin pseudotile=on
 hc rule class=vlc pseudotile=on
-hc rule class=URxvt instance=RANGER pseudotile=on
+hc rule class=MPlayer pseudotile=on
 
 # unlock
 hc unlock
