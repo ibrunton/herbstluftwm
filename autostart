@@ -2,6 +2,7 @@
 
 # ibrunton's herbstluftwm config
 # 2012-05-06
+# 2012-11-30 Fri: updated to v. 0.4.1
 
 function hc () {
 	herbstclient "$@"
@@ -13,7 +14,7 @@ hc keyunbind --all
 hc mouseunbind
 
 # make room for dzen2 bar
-hc pad 0 12 0 0
+hc pad 0 12 0 0 0
 
 # variables
 colour_normal='#666666' #'#ae8451'
@@ -60,10 +61,6 @@ for i in ${!TAG_NAMES[@]} ; do
 	fi
 done
 
-#for i in ( {7..9} ) ; do
-	#hc keybind "$mod-$i" chain . add $i . use $i
-#done
-
 # keybindings: layout
 hc keybind $mod-Control-d remove
 hc keybind $mod-a split horizontal 0.5
@@ -89,7 +86,7 @@ hc keybind $mod-Control-l resize right +$RESIZESTEP
 hc keybind $mod-Tab cycle_all +1
 hc keybind $mod-Shift-Tab cycle_all -1
 hc keybind $mod-c cycle 1
-hc keybind $mod-Shift-c -1
+hc keybind $mod-Shift-c cycle -1
 hc keybind $mod-h focus left
 hc keybind $mod-j focus down
 hc keybind $mod-k focus up
@@ -121,8 +118,10 @@ hc set frame_border_width 0
 hc set window_border_width 1
 hc set window_border_normal_color $colour_normal
 hc set window_border_active_color $colour_active
-hc set window_gap 5
+hc set window_gap 2
+hc set frame_gap 0
 hc set snap_distance 15
+hc set snap_gap 4
 hc set tree_style "╾│ ├└╼─┐"
 
 # tiled tag layouts
