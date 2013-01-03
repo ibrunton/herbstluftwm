@@ -22,7 +22,7 @@ colour_normal='#666666' #'#ae8451'
 colour_active='#426797' 
 #colour_active='#f0ac00'
 terminal=urxvt
-emacs=emet
+#emacs=emet
 file_manager=$HOME/bin/ranger_spawn.sh
 browser=firefox
 alternate_browser=luakit
@@ -35,7 +35,7 @@ hc keybind $mod-Control-Shift-r reload
 hc keybind $mod-Shift-q quit
 hc keybind $mod-Control-c close
 hc keybind $mod-Return spawn $terminal
-hc keybind $mod-Shift-Return spawn $emacs
+hc keybind $mod-Shift-Return spawn emacsclient -c -n
 hc keybind $mod-Shift-Escape spawn sudo systemctl suspend
 hc keybind $mod-p spawn dmenu_run -fn "-misc-ohsnap-medium-r-normal--11-79-100-100-c-60-iso8859-1" -nb '#000000' -nf '#e0e0e0' -sb '#000000' -sf '#4abcd4'
 hc keybind $mod-Shift-p spawn $HOME/bin/dmenu_custom.bash
