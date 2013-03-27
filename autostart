@@ -17,9 +17,9 @@ hc mouseunbind
 hc pad 0 16 0 0 0
 
 # variables
-colour_normal='#666666' #'#ae8451'
+colour_normal='#444444' # '#666666' #'#ae8451'
 #colour_normal='#ae8451'
-colour_active='#426797' 
+colour_active='#09802c' #'#426797' 
 #colour_active='#f0ac00'
 terminal=urxvt
 emacs=$HOME/bin/emet
@@ -128,7 +128,7 @@ hc set snap_gap 4
 hc set tree_style "╾│ ├└╼─┐"
 
 # tiled tag layouts
-hc load ${TAG_NAMES[0]} "(split horizontal:0.450000:1 (split vertical:0.500000:1 (clients horizontal:0) (clients horizontal:0 0x1a00007)) (split vertical:0.650000:0 (clients horizontal:0 0x1800007) (clients horizontal:0)))"
+hc load ${TAG_NAMES[0]} "(split horizontal:0.450000:1 (split vertical:0.500000:1 (clients horizontal:0) (clients horizontal:0)) (split vertical:0.650000:0 (clients max:0) (clients horizontal:0)))"
 hc load ${TAG_NAMES[1]} "(split horizontal:0.750000:0 (clients max:0) (clients horizontal:1))"
 hc load ${TAG_NAMES[3]} "(split horizontal:0.550000:0 (clients vertical:0) (clients max:0))"
 hc load ${TAG_NAMES[4]} "(split horizontal:0.550000:0 (clients max:0) (clients horizontal:0))"
@@ -149,7 +149,7 @@ hc rule focus=on
 hc rule class=Firefox tag=${TAG_NAMES[1]}
 hc rule class=gimp tag=${TAG_NAMES[5]} pseudotile=on
 hc rule class=Okular tag=${TAG_NAMES[4]}
-hc rule class=URxvt instance=MAILTO pseudotile=on
+hc rule class=URxvt instance=MAIL pseudotile=on
 hc rule class=URxvt instance=RANGER pseudotile=on
 hc rule class=URxvt instance=CENTRED pseudotile=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_DIALOG' pseudotile=on
