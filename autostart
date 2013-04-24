@@ -25,7 +25,7 @@ terminal=urxvt
 emacs=$HOME/bin/emet
 file_manager=$HOME/bin/ranger_spawn.sh
 browser=firefox
-alternate_browser=luakit
+alternate_browser=chromium
 
 # keybindings
 mod=Mod4
@@ -147,6 +147,7 @@ hc mousebind $mod+Button3 resize
 hc unrule -F
 hc rule focus=on
 hc rule class=Firefox tag=${TAG_NAMES[1]}
+hc rule class=Chromium tag=${TAG_NAMES[1]}
 hc rule class=gimp tag=${TAG_NAMES[5]} pseudotile=on
 hc rule class=Okular tag=${TAG_NAMES[4]}
 hc rule class=URxvt instance=MAIL pseudotile=on
@@ -166,4 +167,4 @@ hc rule class=Steam tag=${TAG_NAMES[5]} pseudotile=on
 hc unlock
 
 # panel
-conky &
+# conky &
